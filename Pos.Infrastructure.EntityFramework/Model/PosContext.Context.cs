@@ -18,6 +18,7 @@ namespace Pos.Infrastructure.EntityFramework.Model
         public PosEntities()
             : base("name=PosEntities")
         {
+
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
