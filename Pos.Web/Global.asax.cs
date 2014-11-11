@@ -18,7 +18,6 @@ namespace Pos.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
 
-
         }
     }
 }
