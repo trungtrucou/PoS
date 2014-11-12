@@ -1,5 +1,8 @@
 ﻿<div class="row">
-    <div class="col-md-12">
-        <h2>Administrator</h2>
-    </div>
+    <div class="col-md-12" ng-view></div>
 </div>
+<script>
+    angular.element(document).ready(function () {
+        angular.bootstrap(document, ['pos']);
+    });
+</script>

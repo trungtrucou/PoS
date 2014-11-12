@@ -19,6 +19,15 @@ namespace Pos.Web
                 "~/Content/template/js/custom.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-route.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/application").Include(
+                "~/app/init.js"
+                ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/template/css/custom.css",
