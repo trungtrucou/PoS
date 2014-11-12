@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Pos.Infrastructure.EntityFramework.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Pos.Infrastructure.EntityFramework.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Id" />
@@ -140,7 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PosInfrastructureEntityFrameworkModelStoreContainer">
+        <EntityContainer Name="PosInfrastructureEntityFrameworkStoreContainer">
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
@@ -172,8 +172,8 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Pos.Infrastructure.EntityFramework.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Customer">
+      <Schema Namespace="Pos.Infrastructure.EntityFramework" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -189,7 +189,7 @@
           <Property Name="CreditNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_Orders_dbo_Customers_CustomerId" FromRole="Customers" ToRole="Orders" />
         </EntityType>
-        <EntityType Name="Employee">
+        <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -205,19 +205,19 @@
           <Property Name="HireDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Manager_Id" Type="Int32" />
           <NavigationProperty Name="Employees1" Relationship="Self.FK_dbo_Employees_dbo_Employees_Manager_Id" FromRole="Employees" ToRole="Employees1" />
-          <NavigationProperty Name="Employee1" Relationship="Self.FK_dbo_Employees_dbo_Employees_Manager_Id" FromRole="Employees1" ToRole="Employees" />
+          <NavigationProperty Name="Employees2" Relationship="Self.FK_dbo_Employees_dbo_Employees_Manager_Id" FromRole="Employees1" ToRole="Employees" />
         </EntityType>
-        <EntityType Name="OrderDetail">
+        <EntityType Name="OrderDetails">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_dbo_OrderDetails_dbo_Orders_OrderId" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_dbo_OrderDetails_dbo_Orders_OrderId" FromRole="OrderDetails" ToRole="Orders" />
           <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_OrderDetails_OrderDetailId" FromRole="OrderDetails" ToRole="Products" />
         </EntityType>
-        <EntityType Name="Order">
+        <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -225,10 +225,10 @@
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsShipped" Type="Boolean" Nullable="false" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_Orders_dbo_Customers_CustomerId" FromRole="Orders" ToRole="Customers" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_dbo_Orders_dbo_Customers_CustomerId" FromRole="Orders" ToRole="Customers" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_OrderDetails_dbo_Orders_OrderId" FromRole="Orders" ToRole="OrderDetails" />
         </EntityType>
-        <EntityType Name="Product">
+        <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -239,10 +239,10 @@
           <Property Name="DistributedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductTypeId" Type="Int32" Nullable="false" />
           <Property Name="OrderDetailId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_dbo_Products_dbo_OrderDetails_OrderDetailId" FromRole="Products" ToRole="OrderDetails" />
-          <NavigationProperty Name="ProductType" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductTypeId" FromRole="Products" ToRole="ProductTypes" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_dbo_Products_dbo_OrderDetails_OrderDetailId" FromRole="Products" ToRole="OrderDetails" />
+          <NavigationProperty Name="ProductTypes" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductTypeId" FromRole="Products" ToRole="ProductTypes" />
         </EntityType>
-        <EntityType Name="ProductType">
+        <EntityType Name="ProductTypes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -251,10 +251,10 @@
           <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductTypeId" FromRole="ProductTypes" ToRole="Products" />
         </EntityType>
         <Association Name="FK_dbo_Orders_dbo_Customers_CustomerId">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Id" />
@@ -265,8 +265,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_Employees_dbo_Employees_Manager_Id">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="Employees1" Type="Self.Employee" Multiplicity="*" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Employees1" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Id" />
@@ -277,10 +277,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_OrderDetails_dbo_Orders_OrderId">
-          <End Role="Orders" Type="Self.Order" Multiplicity="1">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="Id" />
@@ -291,10 +291,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_Products_dbo_OrderDetails_OrderDetailId">
-          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="1">
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrderDetails">
               <PropertyRef Name="Id" />
@@ -305,10 +305,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_Products_dbo_ProductTypes_ProductTypeId">
-          <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="1">
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductTypes">
               <PropertyRef Name="Id" />
@@ -318,13 +318,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PosEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+        <EntityContainer Name="POS_Context" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" />
           <AssociationSet Name="FK_dbo_Orders_dbo_Customers_CustomerId" Association="Self.FK_dbo_Orders_dbo_Customers_CustomerId">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
@@ -351,9 +351,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PosInfrastructureEntityFrameworkModelStoreContainer" CdmEntityContainer="PosEntities">
+        <EntityContainerMapping StorageEntityContainer="PosInfrastructureEntityFrameworkStoreContainer" CdmEntityContainer="POS_Context">
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Model.Customer">
+            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Customers">
               <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
@@ -369,7 +369,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Model.Employee">
+            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Employees">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -386,7 +386,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Model.OrderDetail">
+            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.OrderDetails">
               <MappingFragment StoreEntitySet="OrderDetails">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
@@ -395,7 +395,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Model.Order">
+            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Orders">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
@@ -405,7 +405,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Model.Product">
+            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Products">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
@@ -418,7 +418,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductTypes">
-            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.Model.ProductType">
+            <EntityTypeMapping TypeName="Pos.Infrastructure.EntityFramework.ProductTypes">
               <MappingFragment StoreEntitySet="ProductTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
@@ -439,7 +439,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

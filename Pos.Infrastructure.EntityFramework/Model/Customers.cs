@@ -12,11 +12,11 @@ namespace Pos.Infrastructure.EntityFramework.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Customers
     {
-        public Customer()
+        public Customers()
         {
-            this.Orders = new HashSet<Order>();
+            this.Orders = new HashSet<Orders>();
         }
     
         public int Id { get; set; }
@@ -30,6 +30,6 @@ namespace Pos.Infrastructure.EntityFramework.Model
         public string Email { get; set; }
         public string CreditNumber { get; set; }
     
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

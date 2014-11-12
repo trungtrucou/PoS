@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3F3E7C82-0816-40C2-9416-A0DB70E16605}</ProjectGuid>
+    <ProjectGuid>{B09D36D3-CA3C-4890-8C47-36DBB065A8F5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pos.Application</RootNamespace>
-    <AssemblyName>Pos.Application</AssemblyName>
+    <RootNamespace>Pos.Infrastructure</RootNamespace>
+    <AssemblyName>Pos.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,19 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contract\ICustomerCommandService.cs" />
-    <Compile Include="Contract\ICustomerQueryService.cs" />
-    <Compile Include="Dto\Customer.cs" />
-    <Compile Include="Implementation\CustomerQueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pos.Infrastructure.EntityFramework\Pos.Infrastructure.EntityFramework.csproj">
-      <Project>{971f2e6c-11ca-4e6c-b254-2a0b0046d68a}</Project>
-      <Name>Pos.Infrastructure.EntityFramework</Name>
-    </ProjectReference>
+    <Folder Include="Caching\" />
+    <Folder Include="Logging\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

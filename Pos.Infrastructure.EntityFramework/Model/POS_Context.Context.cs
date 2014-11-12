@@ -13,12 +13,11 @@ namespace Pos.Infrastructure.EntityFramework.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PosEntities : DbContext
+    public partial class POS_Context : DbContext
     {
-        public PosEntities()
-            : base("name=PosEntities")
+        public POS_Context()
+            : base("name=POS_Context")
         {
-
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -26,11 +25,11 @@ namespace Pos.Infrastructure.EntityFramework.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductType> ProductTypes { get; set; }
+        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ProductTypes> ProductTypes { get; set; }
     }
 }

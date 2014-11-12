@@ -12,18 +12,16 @@ namespace Pos.Infrastructure.EntityFramework.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class ProductTypes
     {
-        public OrderDetail()
+        public ProductTypes()
         {
-            this.Products = new HashSet<Product>();
+            this.Products = new HashSet<Products>();
         }
     
         public int Id { get; set; }
-        public int Quantity { get; set; }
-        public int OrderId { get; set; }
+        public string TypeDescription { get; set; }
     
-        public virtual Order Order { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

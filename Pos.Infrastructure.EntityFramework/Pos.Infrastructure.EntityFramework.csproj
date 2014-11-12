@@ -52,69 +52,68 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Customer.cs">
-      <DependentUpon>PosContext.tt</DependentUpon>
+    <Compile Include="Model\Customers.cs">
+      <DependentUpon>POS_Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Employee.cs">
-      <DependentUpon>PosContext.tt</DependentUpon>
+    <Compile Include="Model\Employees.cs">
+      <DependentUpon>POS_Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Order.cs">
-      <DependentUpon>PosContext.tt</DependentUpon>
+    <Compile Include="Model\OrderDetails.cs">
+      <DependentUpon>POS_Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\OrderDetail.cs">
-      <DependentUpon>PosContext.tt</DependentUpon>
+    <Compile Include="Model\Orders.cs">
+      <DependentUpon>POS_Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PosContext.Context.cs">
+    <Compile Include="Model\POS_Context.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PosContext.Context.tt</DependentUpon>
+      <DependentUpon>POS_Context.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PosContext.cs">
+    <Compile Include="Model\POS_Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PosContext.tt</DependentUpon>
+      <DependentUpon>POS_Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PosContext.Designer.cs">
+    <Compile Include="Model\POS_Context.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PosContext.edmx</DependentUpon>
+      <DependentUpon>POS_Context.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Product.cs">
-      <DependentUpon>PosContext.tt</DependentUpon>
+    <Compile Include="Model\Products.cs">
+      <DependentUpon>POS_Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ProductType.cs">
-      <DependentUpon>PosContext.tt</DependentUpon>
+    <Compile Include="Model\ProductTypes.cs">
+      <DependentUpon>POS_Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\CustomerRepository.cs" />
-    <Compile Include="Persistence\IBaseRepository.cs" />
+    <Compile Include="Persistence\GenericRepository.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Model\PosContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PosContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Model\PosContext.Context.tt">
+    <EntityDeploy Include="Model\POS_Context.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>POS_Context.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\POS_Context.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PosContext.edmx</DependentUpon>
-      <LastGenOutput>PosContext.Context.cs</LastGenOutput>
+      <DependentUpon>POS_Context.edmx</DependentUpon>
+      <LastGenOutput>POS_Context.Context.cs</LastGenOutput>
     </None>
-    <None Include="Model\PosContext.edmx.diagram">
-      <DependentUpon>PosContext.edmx</DependentUpon>
+    <None Include="Model\POS_Context.edmx.diagram">
+      <DependentUpon>POS_Context.edmx</DependentUpon>
     </None>
-    <None Include="Model\PosContext.tt">
+    <None Include="Model\POS_Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PosContext.edmx</DependentUpon>
-      <LastGenOutput>PosContext.cs</LastGenOutput>
+      <DependentUpon>POS_Context.edmx</DependentUpon>
+      <LastGenOutput>POS_Context.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

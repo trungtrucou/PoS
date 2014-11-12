@@ -12,11 +12,11 @@ namespace Pos.Infrastructure.EntityFramework.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Employees
     {
-        public Employee()
+        public Employees()
         {
-            this.Employees1 = new HashSet<Employee>();
+            this.Employees1 = new HashSet<Employees>();
         }
     
         public int Id { get; set; }
@@ -31,7 +31,7 @@ namespace Pos.Infrastructure.EntityFramework.Model
         public System.DateTime HireDate { get; set; }
         public Nullable<int> Manager_Id { get; set; }
     
-        public virtual ICollection<Employee> Employees1 { get; set; }
-        public virtual Employee Employee1 { get; set; }
+        public virtual ICollection<Employees> Employees1 { get; set; }
+        public virtual Employees Employees2 { get; set; }
     }
 }

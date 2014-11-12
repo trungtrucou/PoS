@@ -12,11 +12,11 @@ namespace Pos.Infrastructure.EntityFramework.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Orders
     {
-        public Order()
+        public Orders()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.OrderDetails = new HashSet<OrderDetails>();
         }
     
         public int Id { get; set; }
@@ -24,7 +24,7 @@ namespace Pos.Infrastructure.EntityFramework.Model
         public bool IsShipped { get; set; }
         public int CustomerId { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Customers Customers { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }
