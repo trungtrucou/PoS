@@ -148,10 +148,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pos.Application\Pos.Application.csproj">
-      <Project>{3f3e7c82-0816-40c2-9416-a0db70e16605}</Project>
-      <Name>Pos.Application</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Pos.Infrastructure.EntityFramework\Pos.Infrastructure.EntityFramework.csproj">
       <Project>{971f2e6c-11ca-4e6c-b254-2a0b0046d68a}</Project>
       <Name>Pos.Infrastructure.EntityFramework</Name>
